@@ -114,6 +114,8 @@ The system uses JWT (JSON Web Token) for authentication:
 5. Token expires after 24 hours.
 
 ## System Design Flowchart
+![System architecture](https://github.com/user-attachments/assets/9038d9ab-087e-49a5-80a1-41287769e33f)
+
 
 
 ## Error Handling
