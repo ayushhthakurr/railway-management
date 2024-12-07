@@ -2,6 +2,7 @@
 
 module.exports = {
     authMiddleware: require('./authMiddleware'),
-    validateMiddleware: require('./validateMiddleware')
+    validateMiddleware: require('./validateMiddleware'),
+    auth:require('./auth')
 }
 
