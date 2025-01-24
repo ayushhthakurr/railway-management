@@ -35,11 +35,13 @@ class BookingService {
         throw new Error('Not enough seats available');
       }
 
-      await TrainRepository.updateSeats(
+      await TrainRepository.updateSeatsBooking(
         trainId,
-        train.availableSeats - numSeats,
+        {availableSeats: train.availableSeats - numSeats},
         transaction
       );
+
+      console.log(">>>");
 
       const booking = await BookingRepository.create({
         userId,

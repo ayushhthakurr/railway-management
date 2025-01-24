@@ -30,7 +30,7 @@ class BookingRepository {
   async updateStatus(id, status, transaction) {
     return await Booking.update(
       { status },
-      { 
+      {
         where: { id },
         transaction
       }

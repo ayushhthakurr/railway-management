@@ -1,7 +1,6 @@
 const {UserRepository} = require('../repositories');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 class UserService {
   async createUser(userData) {
@@ -17,8 +16,8 @@ class UserService {
     }
 
     return jwt.sign(
-      { userId: user.id, role: user.role },
-      JWT_SECRET,
+      { userId: user.id },
+      process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
   }

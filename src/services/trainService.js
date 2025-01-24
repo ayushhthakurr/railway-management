@@ -6,7 +6,7 @@ class TrainService {
   }
 
   async updateTrainSeats(trainId, seats) {
-    return await TrainRepository.updateSeats(trainId, seats);
+    return await TrainRepository.updateSeats(trainId, {totalSeats: seats, availableSeats: seats});
   }
 }
 
