@@ -7,7 +7,7 @@ const {validateUser} = validateMiddleware;
 const {validateToken} = authMiddleware;
 
 router.post('/register', validateUser, userController.register);
-router.post('/login', userController.login);
+router.post('/login', validateUser, userController.login);
 router.get('/trains/availability', userController.checkAvailability);
 
 router.post('/bookings', validateToken, userController.bookSeat);

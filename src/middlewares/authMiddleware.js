@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 validateToken = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
+  const token = req.headers['token']?.split(' ')[0];
+
   if (!token) {
     return res.status(401).json({ error: 'No token provided' });
   }
@@ -27,4 +28,5 @@ validateAdmin = (req, res, next) => {
 module.exports = {
   validateAdmin,validateToken
 }
+
 

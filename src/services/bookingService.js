@@ -2,6 +2,25 @@ const {BookingRepository,TrainRepository} = require('../repositories');
 const sequelize = require('../config/database');
 
 class BookingService {
+  async checkTrainAvailability(source, destination) {
+    try {
+      const availableTrains = await TrainRepository.findBySourceAndDestination(source, destination);
+
+      if (!availableTrains || availableTrains.length === 0) {
+        throw new Error('No trains available for this route');
+      }
+
+      return availableTrains.filter(train => train.availableSeats > 0).map(train => ({
+        id: train.id,
+        source: train.source,
+        destination: train.destination,
+        availableSeats: train.availableSeats
+      }));
+
+    } catch (error) {
+      throw error;
+    }
+  }
   async createBooking(userId, trainId, numSeats) {
     const transaction = await sequelize.transaction();
 

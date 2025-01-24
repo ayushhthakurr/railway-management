@@ -6,7 +6,17 @@ class TrainRepository {
   }
 
   async updateSeats(trainId, seats) {
-    return await Train.update({ seats }, { where: { id: trainId } });
+    const newData = {
+      totalSeats: seats,
+      availableSeats: seats
+    }
+    const result =  await Train.update(newData, {
+      where: {
+        id: trainId
+      }
+    });
+
+    return result;
   }
 }
 

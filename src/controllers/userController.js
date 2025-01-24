@@ -30,8 +30,7 @@ exports.checkAvailability = async (req, res) => {
 
 exports.bookSeat = async (req, res) => {
   try {
-    const { trainId, numSeats } = req.body;
-    const userId = req.userId; // From auth middleware
+    const { trainId, numSeats, userId } = req.body;
     const booking = await BookingService.createBooking(userId, trainId, numSeats);
     res.status(201).json(booking);
   } catch (error) {
@@ -42,7 +41,7 @@ exports.bookSeat = async (req, res) => {
 exports.getBookingDetails = async (req, res) => {
   try {
     const bookingId = req.params.id;
-    const userId = req.userId;
+    const { userId } = req.body;
     const booking = await BookingService.getBookingDetails(bookingId, userId);
     res.json(booking);
   } catch (error) {
@@ -52,7 +51,7 @@ exports.getBookingDetails = async (req, res) => {
 
 exports.getUserBookings = async (req, res) => {
   try {
-    const userId = req.userId;
+    const { userId } = req.body;
     const bookings = await BookingService.getUserBookings(userId);
     res.json(bookings);
   } catch (error) {
@@ -63,7 +62,7 @@ exports.getUserBookings = async (req, res) => {
 exports.cancelBooking = async (req, res) => {
   try {
     const bookingId = req.params.id;
-    const userId = req.userId;
+    const { userId } = req.body;
     const result = await BookingService.cancelBooking(bookingId, userId);
     res.json(result);
   } catch (error) {

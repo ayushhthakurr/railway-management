@@ -21,3 +21,5 @@ sequelize.authenticate()
     });
 
 module.exports = sequelize;
+
+

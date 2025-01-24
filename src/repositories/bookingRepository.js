@@ -1,6 +1,15 @@
 const {Booking} = require('../models');
 
 class BookingRepository {
+
+  async findBySourceAndDestination(source, destination) {
+  return await Train.findAll({
+    where: {
+      source: source,
+      destination: destination
+    }
+  });
+}
   async create(bookingData, transaction) {
     return await Booking.create(bookingData, { transaction });
   }

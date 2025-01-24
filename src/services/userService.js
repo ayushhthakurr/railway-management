@@ -1,6 +1,7 @@
 const {UserRepository} = require('../repositories');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 class UserService {
   async createUser(userData) {
@@ -10,11 +11,18 @@ class UserService {
 
   async loginUser(credentials) {
     const user = await UserRepository.findByEmail(credentials.email);
+
     if (!user || !await bcrypt.compare(credentials.password, user.password)) {
       throw new Error('Invalid credentials');
     }
-    return jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+
+    return jwt.sign(
+      { userId: user.id, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    );
   }
 }
 
 module.exports = new UserService();
+
